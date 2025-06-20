@@ -10,7 +10,8 @@ import {
 } from "drizzle-orm/pg-core"
 import { createdAt, id, updatedAt } from "../schemaHelpers"
 import { OrganizationTable } from "./organization"
-
+import { relations } from "drizzle-orm"
+import { JobListingApplicationTable } from "./jobListingApplication"
 
 export const wageIntervals = ["hourly", "yearly"] as const
 export type WageInterval = (typeof wageIntervals)[number]
@@ -69,3 +70,13 @@ export const JobListingTable = pgTable(
     table => [index().on(table.stateAbbreviation)]
 )
 
+export const jobListingReferences = relations(
+    JobListingTable,
+    ({ one, many }) => ({
+        organization: one(OrganizationTable, {
+            fields: [JobListingTable.organizationId],
+            references: [OrganizationTable.id],
+        }),
+        applications: many(JobListingApplicationTable),
+    })
+)
