@@ -1,3 +1,19 @@
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+
 export default function HomePage() {
-  return <h1>Hello </h1>;
+  return (
+    <SidebarProvider className="overflow-y-hidden">
+      <Sidebar collapsible="icon" className="overflow-hidden">
+        <SidebarHeader className="flex-row">
+          <SidebarTrigger />
+          <span className="text-xl text-nowrap">Sidebar</span>
+        </SidebarHeader>
+      </Sidebar>
+    </SidebarProvider>
+  );
 }
