@@ -8,6 +8,7 @@ export function useIsDarkMode() {
     })
 
     useEffect(() => {
+        // How does this AbortController works?
         const controller = new AbortController()
         window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
             "change",
