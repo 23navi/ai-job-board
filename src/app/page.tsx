@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 import { AppSidebarClient } from "./_AppSidebarClient";
+import { SignedIn } from "@/services/clerk/components/SignInStatus";
+import { SidebarUserButton } from "@/features/users/components/SidebarUserButton";
 
 export default function HomePage({ children }: { children: ReactNode }) {
   return (
@@ -22,16 +24,18 @@ export default function HomePage({ children }: { children: ReactNode }) {
         <Sidebar collapsible="icon" className="overflow-hidden">
           <SidebarHeader className="flex-row">
             <SidebarTrigger />
-            <span className="text-xl text-nowrap">Sidebar</span>
+            <span className="text-xl text-nowrap">WDS Jobs</span>
           </SidebarHeader>
           <SidebarContent></SidebarContent>
-          <SidebarFooter>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton>My footer button</SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarFooter>
+          <SignedIn>
+            <SidebarFooter>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton>{<SidebarUserButton />}</SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarFooter>
+          </SignedIn>
         </Sidebar>
         <main className="flex-1">{children}</main>
       </AppSidebarClient>
